@@ -1,72 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irichi <irichi@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/18 16:21:15 by irichi            #+#    #+#             */
+/*   Updated: 2026/10/18 16:21:15 by irichi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "libft.h"
 
-static size_t ft_count_digit(long n)
+static size_t	ft_count_digit(long n)
 {
-    size_t count;
+	size_t	count;
 
-    if(n == 0)
-    {
-        count = 1;
-        return count;
-    }
-
-    count = 0;
-    if(n < 0)
-    {
-        count++;
-    }
-    while(n > 0)
-    {
-        count++;
-        n = n/10;
-    }
-
-    printf("%ld\n", count);
-
-    return count;
+	if (n == 0)
+		return (1);
+	count = 0;
+	if (n < 0)
+	{
+		count++;
+		n = -n;
+	}
+	while (n > 0)
+	{
+		count++;
+		n = n / 10;
+	}
+	return (count);
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-    size_t i;
-    size_t len;
-    char *result;
+	size_t	len;
+	long	num;
+	char	*result;
 
-    if(n == -2147483648)
-    {
-        return "-2147483648";
-    }
-
-    len = ft_count_digit(n) + 1;
-    result = malloc(len * sizeof(char));
-    if(!result)
-        return NULL;
-
-    if(n < 0)
-        result[0] = '-';
-    
-    i = len - 2;
-
-    printf("i = %ld\n", i);
-    printf("len = %ld\n", len);
-
-    while(n > 0)
-    {
-        result[i] = (n % 10) + '0';
-        printf("%c\n", result[i]);
-        n = n / 10;
-        i++;
-    }
-    result[len - 1] = '\0';
-
-    return result;
+	num = n;
+	len = ft_count_digit(num);
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	result[len] = '\0';
+	if (num < 0)
+		num = -num;
+	while (len--)
+	{
+		result[len] = num % 10 + '0';
+		num /= 10;
+	}
+	if (n < 0)
+		result[0] = '-';
+	return (result);
 }
 
-
-int main()
-{
-    printf("%s", ft_itoa(50));
-
-    return 0;
-}
+// int main()
+// {
+//     long long n = -9223372036854775807 -1;
+//     printf("%lld\n", n);
+//     printf("%s\n", ft_itoa((int)-75849));
+//     printf("%s\n", ft_itoa((int)75849));
+//     printf("%s\n", ft_itoa((int)-0));
+//     printf("%s\n", ft_itoa((int)0));
+//     printf("%s\n", ft_itoa((int)-2147483648));
+//     printf("%s\n", ft_itoa((int)2147483647));
+//     printf("%s\n", ft_itoa((int)9223372036854775807));
+//     printf("%s\n", ft_itoa((int)n));
+//     return 0;
+// }

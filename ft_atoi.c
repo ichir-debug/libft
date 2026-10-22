@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: irichi <irichi@student.1337.ma>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: irichi <irichi@student.1337.ma>            +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
 /*   Created: 2026/10/14 17:02:02 by irichi            #+#    #+#             */
 /*   Updated: 2026/10/14 17:02:02 by irichi           ###   ########.fr       */
 /*                                                                            */
@@ -14,9 +17,9 @@
 
 int	ft_atoi(const char *nptr)
 {
-	int	n;
-	int	sign;
-	int	i;
+	long	n;
+	int		sign;
+	int		i;
 
 	i = 0;
 	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
@@ -25,14 +28,17 @@ int	ft_atoi(const char *nptr)
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
-			sign = -sign;
+			sign = -1;
 		i++;
 	}
 	n = 0;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	while ((nptr[i] >= '0' && nptr[i] <= '9') && n != 9223372036854775807)
 	{
-		n = n * 10 + nptr[i] - '0';
+		if (n <= (9223372036854775807 - (nptr[i] - '0')) / 10)
+			n = n * 10 + nptr[i] - '0';
+		else
+			n = 9223372036854775807;
 		i++;
 	}
-	return (n * sign);
+	return ((int)(n * sign));
 }

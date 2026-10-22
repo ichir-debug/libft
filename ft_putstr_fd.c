@@ -1,18 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irichi <irichi@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/18 14:24:52 by irichi            #+#    #+#             */
+/*   Updated: 2026/10/18 14:25:02 by irichi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-    unsigned int i;
+	unsigned int	i;
 
-    if(fd >= 0 && fd <= 2)
-    {
-        i = 0;
-        while(s[i])
-        {
-            ft_putchar_fd(s[i], fd);
-            i++;
-        }
-    }
-
-    return;
+	if (!s || fd < 0)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }
